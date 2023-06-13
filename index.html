@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>教育的符計算機</title>
+
+   
+    <style>
+      .container{
+        max-width: 520px;
+      }
+      .notes{
+        color: lightgrey;
+        font-size: 14px;
+      }
+      .furo{
+        display: inline-block;
+        padding-bottom: 3px;
+        padding-left: 3px;
+        transform: rotate(90deg);
+        padding-right: 1px;
+        margin-left: -3px;
+        margin-right: -1px;
+      }
+      input[type=radio]{
+        display: none;
+      }
+      input[type=radio]:checked + label {
+        background: gray;
+      }
+      .label{
+        width: 100%;
+        background-color: buttonface;
+        border-width: 2px;
+        border-style: outset;
+        border-color: buttonborder;
+      }
+      button{
+        width:100%;
+      }
+      body{
+        background-color: #ffffff;
+      }
+      .point{
+        font-size: 20px;
+        font-weight: bold;
+      }
+    </style> 
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>教育的符計算機</h1>
+
+
+      <div class="row mt-4">
+        <div class="col-2">役</div>
+        <div class="col point" id="yaku">&nbsp;</div>
+      </div>
+
+      <div class="row justify-content-end">
+        <div class="col-3 text-center">
+          <input type="radio" name="yaku" value="20end" id="pinfutsumo" onchange="calculate(this.name,this.value)">
+          <label for="pinfutsumo" class="label">ピンフツモ</label>
+        </div>
+        
+        <div class="col-3 text-center">
+          <input type="radio" name="yaku" value="25end" id="chiitoitsu" onchange="calculate(this.name,this.value)">
+          <label for="chiitoitsu" class="label">七対子</label>
+        </div>
+        
+        <div class="col-3 text-center">
+          <input type="radio" name="yaku" value="20start" id="sonota_yaku" onchange="calculate(this.name,this.value)">
+          <label for="sonota_yaku" class="label">その他</label>
+        </div>
+      </div>
+
+
+
+      <div class="row mt-4">
+        <div class="col-2 ">上がり</div>
+        <div class="col point" id="agari">&nbsp;</div>
+      </div>
+
+      <div class="row justify-content-end">
+        <div class="col-3 text-center">
+          <input type="radio" name="agari" value="+10" id="menzenron" onchange="calculate(this.name,this.value)">
+          <label for="menzenron" class="label">面前ロン</label>
+        </div>
+        
+        <div class="col-3 text-center">
+          <input type="radio" name="agari" value="+2" id="tsumo" onchange="calculate(this.name,this.value)">
+          <label for="tsumo" class="label">ツモ</label>
+        </div>
+        
+        <div class="col-3 text-center">
+          <input type="radio" name="agari" value="+0" id="sonota_agari" onchange="calculate(this.name,this.value)">
+          <label for="sonota_agari" class="label">その他</label>
+        </div>
+      </div>      
+
+
+      <div class="row mt-4">
+        <div class="col-2">面子</div>
+        <div class="col point" id="mentsu">&nbsp;</div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2 text-center"><span id="pt2">0</span><span>×</span></div>
+        <div class="col-6 text-center">
+          <div class="row">
+            <div class="col-5 p-0">🀛<span class="furo">🀛</span>🀛</div>
+            <div class="col-2 p-0">/</div>
+            <div class="col-5 p-0">---</div>
+          </div>
+        </div>
+        <div class="col-2 text-center"><button onclick="increment('pt2', 1)">+2</button></div>
+        <div class="col-2 text-center"><button onclick="increment('pt2', -1)">-2</button></div>
+      </div>
+
+
+      <div class="row mb-3">
+        <div class="col-2 text-center"><span id="pt4">0</span><span>×</span></div>
+        <div class="col-6 text-center">
+          <div class="row">
+            <div class="col-5 p-0">🀛🀛🀛</div>
+            <div class="col-2 p-0">/</div>
+            <div class="col-5 p-0">🀄<span class="furo">🀄</span>🀄</div>
+          </div>
+        </div>
+        <div class="col-2 text-center"><button onclick="increment('pt4', 1)">+4</button></div>
+        <div class="col-2 text-center"><button onclick="increment('pt4', -1)">-4</button></div>
+      </div>
+
+
+      <div class="row mb-3">
+        <div class="col-2 text-center"><span id="pt8">0</span><span>×</span></div>
+        <div class="col-6 text-center">
+          <div class="row">
+            <div class="col-5 p-0">🀛<span class="furo">🀛</span>🀛🀛</div>
+            <div class="col-2 p-0">/</div>
+            <div class="col-5 p-0">🀄🀄🀄</div>
+          </div>
+        </div>
+        <div class="col-2 text-center"><button onclick="increment('pt8', 1)">+8</button></div>
+        <div class="col-2 text-center"><button onclick="increment('pt8', -1)">-8</button></div>
+      </div>
+
+
+      <div class="row mb-3">
+        <div class="col-2 text-center"><span id="pt16">0</span><span>×</span></div>
+        <div class="col-6 text-center">
+          <div class="row">
+            <div class="col-5 p-0">🀛🀫🀫🀛</div>
+            <div class="col-2 p-0">/</div>
+            <div class="col-5 p-0">🀄<span class="furo">🀄</span>🀄🀄</div>
+          </div>
+        </div>
+        <div class="col-2 text-center"><button onclick="increment('pt16', 1)">+16</button></div>
+        <div class="col-2 text-center"><button onclick="increment('pt16', -1)">-16</button></div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2 text-center"><span id="pt32">0</span><span>×</span></div>
+        <div class="col-6 text-center">
+          <div class="row">
+            <div class="col-5 p-0">---</div>
+            <div class="col-2 p-0">/</div>
+            <div class="col-5 p-0">🀄🀫🀫🀄</div>
+          </div>
+        </div>
+        <div class="col-2 text-center"><button onclick="increment('pt32', 1)">+32</button></div>
+        <div class="col-2 text-center"><button onclick="increment('pt32', -1)">-32</button></div>
+      </div>
+
+
+    
+
+
+      <div class="row mt-4">
+        <div class="col-2">頭</div>
+        <div class="col point" id="atama">&nbsp;</div>
+      </div>
+
+      <div class="row justify-content-end">
+        <div class="col-4 text-center">
+          <input type="radio" name="atama" value="+2" id="yakuhai" onchange="calculate(this.name,this.value)">
+          <label for="yakuhai" class="label">役牌</label>
+        </div>
+        
+        <div class="col-4 offset-1 text-center">
+          <input type="radio" name="atama" value="+0" id="hai" onchange="calculate(this.name,this.value)">
+          <label for="hai" class="label">その他</label>
+        </div>
+      </div>
+
+
+      <div class="row mt-4">
+        <div class="col-2">待ち</div>
+        <div class="col point" id="machi">&nbsp;</div>
+      </div>
+
+      <div class="row justify-content-end">
+        <div class="col-4 text-center">
+          <input type="radio" name="machi" value="+2" id="only" onchange="calculate(this.name,this.value)">
+          <label for="only" class="label">1種類</label>
+        </div>
+        
+        <div class="col-4 offset-1 text-center">
+          <input type="radio" name="machi" value="+0" id="many" onchange="calculate(this.name,this.value)">
+          <label for="many" class="label">たくさん</label>
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+    
+    <script>
+      let isZentei_sonota = 0;
+      let counter = {
+        pt2 : 0,
+        pt4 : 0,
+        pt8 : 0,
+        pt16 : 0,
+        pt32 : 0,
+      }
+
+      function increment(point, num) {
+        if(counter[point] > 0 || num > 0){
+          counter[point] += num;
+          document.getElementById(point).textContent = counter[point];
+          calculate_mentsu();
+        }  
+      }
+
+      function calculate_mentsu(){
+        document.getElementById('mentsu').textContent =  "";
+        for (let ptIdx in counter) {
+          console.log(ptIdx);
+          console.log(counter[ptIdx]);
+          for (let count = 0; count < counter[ptIdx]; count++) {
+            document.getElementById('mentsu').textContent +=  ("+"+ ptIdx.slice(2) +"　");
+          }
+        }
+      }
+
+      function calculate(name, val){
+        document.getElementById(name).textContent = val;
+      }
+
+    </script>
+  </body>
+</html>
